@@ -22,7 +22,13 @@ public class ArticuloService {
                 .collect(Collectors.toList());
     }
 
-    public ArticulosDTO serv_Inserta (ArticulosDTO dto){
+    public ArticulosDTO serv_buscaId(Long id) {
+        Articulos articuloporId = repo.findById(id).orElseThrow(() -> new RuntimeException("Articulo con id:"+id + "no encontrado"));
+        return ArticuloMapper.toDTO(articuloporId);
+
+    }
+
+    public ArticulosDTO serv_Inserta(ArticulosDTO dto){
     Articulos articulo = ArticuloMapper.toEntity(dto);
     Articulos insertado = repo.save(articulo);
     return ArticuloMapper.toDTO(insertado);

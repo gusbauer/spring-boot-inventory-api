@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*") //
 @RestController
 @RequestMapping("/api/articulos")
 public class ArticuloController {
@@ -17,6 +18,11 @@ public class ArticuloController {
     @GetMapping
     public List<ArticulosDTO> listar(){
         return servicio.serv_consulta();
+    }
+
+    @GetMapping("/{id}")
+    public ArticulosDTO buscarPorId(@PathVariable Long id) {
+        return servicio.serv_buscaId(id);
     }
 
     @PostMapping
@@ -33,6 +39,4 @@ public class ArticuloController {
     public String borrArticulos(@PathVariable Long id){
         return servicio.eliminArticulos(id);
     }
-
 }
-
